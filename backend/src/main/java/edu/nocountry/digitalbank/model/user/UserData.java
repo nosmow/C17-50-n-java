@@ -8,11 +8,13 @@ import jakarta.validation.constraints.NotNull;
 
 public record UserData(
         @NotNull
+        String username,
+        @NotNull
         UserRol role,
         @NotBlank
         @Email
         String email,
-        int phone,
+        String phone,
         @NotBlank
         String country,
         @NotBlank

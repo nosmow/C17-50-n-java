@@ -2,15 +2,17 @@ package edu.nocountry.digitalbank.model.user;
 
 public record UserDetails(
         int id,
+        String username,
         UserRol role,
         String email,
-        int phone,
+        String phone,
         String country,
         String password
 ) {
     public UserDetails(User user) {
         this(
                 user.getId(),
+                user.getUsername(),
                 user.getRole(),
                 user.getEmail(),
                 user.getPhone(),

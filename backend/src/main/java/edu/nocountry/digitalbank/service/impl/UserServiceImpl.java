@@ -17,8 +17,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails save(UserData data) {
+        validateUsername(data.username());
         validateEmail(data.email());
         var user = User.builder()
+                .username(data.username())
                 .role(data.role())
                 .email(data.email())
                 .phone(data.phone())
@@ -31,6 +33,11 @@ public class UserServiceImpl implements UserService {
         return new UserDetails(user);
     }
 
+    public void validateUsername(String username) {
+        if(username != null && userRepository.existsByUsername(username)) {
+            throw new IntegrityValidation("The username has already been registered previously");
+        }
+    }
     public void validateEmail(String email) {
         if(email != null && userRepository.existsByEmail(email)) {
             throw new IntegrityValidation("The email has already been registered previously");

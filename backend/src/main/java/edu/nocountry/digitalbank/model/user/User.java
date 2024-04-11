@@ -14,10 +14,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String username;
     @Enumerated(EnumType.STRING)
     private UserRol role;
     private String email;
-    private int phone;
+    private String phone;
     private String country;
     private String password;
     private boolean active;
