@@ -6,8 +6,7 @@ public record UserDetails(
         UserRol role,
         String email,
         String phone,
-        String country,
-        String password
+        String country
 ) {
     public UserDetails(User user) {
         this(
@@ -16,8 +15,7 @@ public record UserDetails(
                 user.getRole(),
                 user.getEmail(),
                 user.getPhone(),
-                user.getCountry(),
-                user.getPassword()
+                user.getCountry()
         );
     }
 }

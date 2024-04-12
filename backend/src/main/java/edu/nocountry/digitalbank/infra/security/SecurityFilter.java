@@ -1,4 +1,4 @@
-package edu.nocountry.digitalbank.infra.errors.security;
+package edu.nocountry.digitalbank.infra.security;
 
 import edu.nocountry.digitalbank.repository.UserRepository;
 import edu.nocountry.digitalbank.service.impl.TokenServiceImpl;
@@ -25,10 +25,10 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var authHeader = request.getHeader("Authorization");
-        if(authHeader != null) {
+        if (authHeader != null) {
             var token = authHeader.replace("Bearer ", "");
             var subject = tokenService.getSubject(token);
-            if(subject != null) {
+            if (subject != null) {
                 var user = userRepository.findByUsername(subject);
                 //UserActiveSesion.idUser = Long.valueOf(user.toString());
                 //UserActiveSesion.username = user.getUsername();
