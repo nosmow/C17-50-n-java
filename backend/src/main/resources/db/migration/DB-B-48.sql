@@ -1,0 +1,1 @@
+ALTER TABLE `digital_bank`.`people` DROP `birthdate`
