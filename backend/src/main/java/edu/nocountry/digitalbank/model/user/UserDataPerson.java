@@ -4,8 +4,22 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record UserData(
+import java.time.LocalDate;
+
+public record UserDataPerson(
+        @NotBlank
+        String name,
+
+        @NotBlank
+        String lastname,
+
+        @NotBlank
+        String dni,
+
         @NotNull
+        LocalDate birthdate,
+
+        @NotBlank
         String username,
         @NotNull
         UserRol role,
@@ -14,7 +28,6 @@ public record UserData(
         String email,
         String phone,
         @NotBlank
-        String country,
-        @NotBlank
         String password) {
+
 }

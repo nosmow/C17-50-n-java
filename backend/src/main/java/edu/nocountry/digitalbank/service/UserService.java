@@ -1,8 +1,8 @@
 package edu.nocountry.digitalbank.service;
 
-import edu.nocountry.digitalbank.model.user.UserData;
-import edu.nocountry.digitalbank.model.user.UserDetails;
+import edu.nocountry.digitalbank.model.user.UserDataPerson;
+import edu.nocountry.digitalbank.model.user.UserDetailsPerson;
 
 public interface UserService {
-    public UserDetails saveUser(UserData data);
+    UserDetailsPerson saveUserPerson(UserDataPerson data);
 }

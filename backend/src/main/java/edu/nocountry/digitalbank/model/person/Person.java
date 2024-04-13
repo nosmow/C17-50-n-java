@@ -29,7 +29,7 @@ public class Person {
     private String name;
 
     private String lastname;
-    
+
     private String dni;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

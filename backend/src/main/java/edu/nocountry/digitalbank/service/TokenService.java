@@ -5,7 +5,9 @@ import edu.nocountry.digitalbank.model.user.User;
 import java.time.Instant;
 
 public interface TokenService {
-    public String generateToken(User user);
-    public String getSubject(String token);
-    public Instant generateDateExpiration();
+    String generateToken(User user);
+
+    String getSubject(String token);
+
+    Instant generateDateExpiration();
 }
