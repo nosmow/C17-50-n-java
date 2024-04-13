@@ -1,5 +1,6 @@
 package edu.nocountry.digitalbank.model.user;
 
+import edu.nocountry.digitalbank.model.account.Account;
 import edu.nocountry.digitalbank.model.company.Company;
 import edu.nocountry.digitalbank.model.person.Person;
 import jakarta.persistence.*;
@@ -44,6 +45,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Company company;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Account account;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
