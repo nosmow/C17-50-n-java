@@ -2,10 +2,9 @@ package edu.nocountry.digitalbank.service.impl;
 
 import edu.nocountry.digitalbank.infra.errors.IntegrityValidation;
 import edu.nocountry.digitalbank.infra.security.SecurityConfigurations;
-import edu.nocountry.digitalbank.model.user.User;
-import edu.nocountry.digitalbank.model.user.UserDataPerson;
-import edu.nocountry.digitalbank.model.user.UserDetailsPerson;
+import edu.nocountry.digitalbank.model.user.*;
 import edu.nocountry.digitalbank.repository.UserRepository;
+import edu.nocountry.digitalbank.service.CompanyService;
 import edu.nocountry.digitalbank.service.PersonService;
 import edu.nocountry.digitalbank.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +18,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PersonService personService;
+    private final CompanyService companyService;
+
 
     public UserDetailsPerson saveUserPerson(UserDataPerson data) {
         validateUsername(data.username());
@@ -38,6 +39,26 @@ public class UserServiceImpl implements UserService {
         var person = personService.savePerson(data, user);
 
         return new UserDetailsPerson(user, person);
+    }
+
+    public UserDetailsCompany saveUserCompany(UserDataCompany data) {
+        validateUsername(data.username());
+        validateEmail(data.email());
+
+        var user = User.builder()
+                .username(data.username())
+                .role(data.role())
+                .email(data.email())
+                .phone(data.phone())
+                .country(ZoneId.systemDefault().toString())
+                .password(SecurityConfigurations.encryptPassword(data.password()))
+                .active(true)
+                .build();
+
+        userRepository.save(user);
+        var company = companyService.saveCompany(data, user);
+
+        return new UserDetailsCompany(user, company);
     }
 
     public void validateUsername(String username) {

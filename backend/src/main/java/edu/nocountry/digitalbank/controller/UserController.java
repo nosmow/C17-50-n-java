@@ -1,6 +1,8 @@
 package edu.nocountry.digitalbank.controller;
 
+import edu.nocountry.digitalbank.model.user.UserDataCompany;
 import edu.nocountry.digitalbank.model.user.UserDataPerson;
+import edu.nocountry.digitalbank.model.user.UserDetailsCompany;
 import edu.nocountry.digitalbank.model.user.UserDetailsPerson;
 import edu.nocountry.digitalbank.service.impl.UserServiceImpl;
 import jakarta.transaction.Transactional;
@@ -20,8 +22,14 @@ public class UserController {
     @PostMapping("/register")
     @Transactional
     public ResponseEntity<UserDetailsPerson> saveUserPerson(@RequestBody @Valid UserDataPerson data) {
-        System.out.println(data.name());
         var response = userService.saveUserPerson(data);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/register/company")
+    @Transactional
+    public ResponseEntity<UserDetailsCompany> saveUserCompany(@RequestBody @Valid UserDataCompany data) {
+        var response = userService.saveUserCompany(data);
         return ResponseEntity.ok(response);
     }
 }
