@@ -4,6 +4,7 @@ import edu.nocountry.digitalbank.infra.errors.IntegrityValidation;
 import edu.nocountry.digitalbank.infra.security.SecurityConfigurations;
 import edu.nocountry.digitalbank.model.user.*;
 import edu.nocountry.digitalbank.repository.UserRepository;
+import edu.nocountry.digitalbank.service.AccountService;
 import edu.nocountry.digitalbank.service.CompanyService;
 import edu.nocountry.digitalbank.service.PersonService;
 import edu.nocountry.digitalbank.service.UserService;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PersonService personService;
     private final CompanyService companyService;
-
+    private final AccountService accountService;
 
     public UserDetailsPerson saveUserPerson(UserDataPerson data) {
         validateUsername(data.username());
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
         var person = personService.savePerson(data, user);
+        accountService.saveAccount(user);
 
         return new UserDetailsPerson(user, person);
     }
@@ -57,6 +59,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
         var company = companyService.saveCompany(data, user);
+        accountService.saveAccount(user);
 
         return new UserDetailsCompany(user, company);
     }
