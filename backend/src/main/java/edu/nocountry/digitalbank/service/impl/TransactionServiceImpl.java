@@ -2,9 +2,8 @@ package edu.nocountry.digitalbank.service.impl;
 
 import edu.nocountry.digitalbank.infra.errors.IntegrityValidation;
 import edu.nocountry.digitalbank.model.account.Account;
-import edu.nocountry.digitalbank.model.transaction.Transaction;
-import edu.nocountry.digitalbank.model.transaction.TransactionData;
-import edu.nocountry.digitalbank.model.transaction.TransactionResponseSend;
+import edu.nocountry.digitalbank.model.account.AccountDetails;
+import edu.nocountry.digitalbank.model.transaction.*;
 import edu.nocountry.digitalbank.repository.TransactionRepository;
 import edu.nocountry.digitalbank.service.AccountService;
 import edu.nocountry.digitalbank.service.TransactionService;
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +45,22 @@ public class TransactionServiceImpl implements TransactionService {
 
         } catch (Exception e) {
             throw new IntegrityValidation("No se pudo completar la transacción: " + e.getMessage());
+        }
+    }
+
+    public TransactionListDetails getUserTransactions(String username) {
+        try {
+            var account = accountService.findByUserUsername(username);
+            var accountDetails = new AccountDetails(account);
+            var transactions = transactionRepository.findTransactionLimitFive(account.getId());
+            List<TransactionDetails> transactionsDetails = new ArrayList<>();
+            for (var transaction : transactions) {
+                transactionsDetails.add(new TransactionDetails(account, transaction));
+            }
+
+            return new TransactionListDetails(accountDetails, transactionsDetails);
+        } catch (Exception e) {
+            throw new IntegrityValidation(e.getMessage());
         }
     }
 

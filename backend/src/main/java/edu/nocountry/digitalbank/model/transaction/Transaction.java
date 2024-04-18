@@ -1,7 +1,6 @@
 package edu.nocountry.digitalbank.model.transaction;
 
 import edu.nocountry.digitalbank.model.account.Account;
-import edu.nocountry.digitalbank.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

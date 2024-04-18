@@ -1,6 +1,7 @@
 package edu.nocountry.digitalbank.controller;
 
 import edu.nocountry.digitalbank.model.transaction.TransactionData;
+import edu.nocountry.digitalbank.model.transaction.TransactionListDetails;
 import edu.nocountry.digitalbank.model.transaction.TransactionResponseSend;
 import edu.nocountry.digitalbank.service.TransactionService;
 import edu.nocountry.digitalbank.util.JwtUtils;
@@ -21,9 +22,16 @@ public class TransactionController {
     @PostMapping("/send")
     public ResponseEntity<TransactionResponseSend> sendMoney(@RequestHeader("Authorization") String token, @RequestBody @Valid TransactionData data) {
         String username = jwtUtils.extractUsername(token);
-
         var transaction = transactionService.sendMoney(username, data);
 
         return ResponseEntity.ok().body(transaction);
+    }
+
+    @GetMapping("/home")
+    public ResponseEntity<TransactionListDetails> getHome(@RequestHeader("Authorization") String token) {
+        String username = jwtUtils.extractUsername(token);
+        var transactions = transactionService.getUserTransactions(username);
+        
+        return ResponseEntity.ok().body(transactions);
     }
 }
