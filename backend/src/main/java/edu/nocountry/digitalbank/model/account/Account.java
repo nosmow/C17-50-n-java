@@ -3,16 +3,14 @@ package edu.nocountry.digitalbank.model.account;
 import edu.nocountry.digitalbank.model.transaction.Transaction;
 import edu.nocountry.digitalbank.model.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Table(name = "accounts")
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

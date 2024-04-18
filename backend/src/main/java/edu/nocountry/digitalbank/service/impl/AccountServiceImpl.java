@@ -1,5 +1,6 @@
 package edu.nocountry.digitalbank.service.impl;
 
+import edu.nocountry.digitalbank.infra.errors.IntegrityValidation;
 import edu.nocountry.digitalbank.model.account.Account;
 import edu.nocountry.digitalbank.model.user.User;
 import edu.nocountry.digitalbank.repository.AccountRepository;
@@ -46,5 +47,31 @@ public class AccountServiceImpl implements AccountService {
                 .build();
 
         accountRepository.save(account);
+    }
+
+    public Account findByUserUsername(String username) {
+        if (!accountRepository.existsByUserUsername(username)) {
+            throw new IntegrityValidation("El usuario no tiene una cuenta activa");
+        }
+
+        return accountRepository.findByUserUsername(username);
+    }
+
+    public Account findByNumber(String number) {
+        if (!accountRepository.existsByNumber(number)) {
+            throw new IntegrityValidation("El número de cuenta no existe");
+        }
+
+        return accountRepository.findByNumber(number);
+    }
+
+    public void extractBalance(Account senderAccount, BigDecimal amount) {
+        senderAccount.setBalance(senderAccount.getBalance().subtract(amount));
+        accountRepository.save(senderAccount);
+    }
+
+    public void addBalance(Account receiverAccount, BigDecimal amount) {
+        receiverAccount.setBalance(receiverAccount.getBalance().add(amount));
+        accountRepository.save(receiverAccount);
     }
 }
