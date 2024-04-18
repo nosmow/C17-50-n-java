@@ -1,3 +1,3 @@
-ALTER TABLE `digital_bank`.`users` MODIFY `phone` VARCHAR(17) NULL;
+ALTER TABLE `users` MODIFY `phone` VARCHAR(17) NULL;
 
-ALTER TABLE `digital_bank`.`users` ADD `username` VARCHAR(20) NOT NULL;
+ALTER TABLE `users` ADD `username` VARCHAR(20) NOT NULL;

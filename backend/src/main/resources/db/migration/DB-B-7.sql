@@ -1,4 +1,4 @@
-CREATE TABLE `digital_bank`.`users`
+CREATE TABLE `users`
 (
     `id`       INT UNSIGNED                                      NOT NULL AUTO_INCREMENT,
     `role`     ENUM ('ROLE_ADMIN', 'ROLE_USER', 'ROLE_BUSINESS') NOT NULL,

@@ -1,1 +1,1 @@
-ALTER TABLE `digital_bank`.`people` DROP `birthdate`
+ALTER TABLE `people` DROP `birthdate`
