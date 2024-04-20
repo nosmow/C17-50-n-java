@@ -64,6 +64,10 @@ public class UserServiceImpl implements UserService {
         return new UserDetailsCompany(user, company);
     }
 
+    public User findUserUsername(String username) {
+        return userRepository.getByUsername(username);
+    }
+
     public void validateUsername(String username) {
         if (username != null && userRepository.existsByUsername(username)) {
             throw new IntegrityValidation("Este nombre de usuario no esta disponible");
