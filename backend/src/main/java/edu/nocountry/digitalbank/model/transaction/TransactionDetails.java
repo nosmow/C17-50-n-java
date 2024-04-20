@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record TransactionDetails(
+        int transactionId,
         LocalDate transactionDate,
         String accountNumber,
         String username,
@@ -13,6 +14,7 @@ public record TransactionDetails(
 ) {
     public TransactionDetails(Account currentAccount, Transaction transaction) {
         this(
+                transaction.getId(),
                 transaction.getTransactionDate(),
                 getAccount(currentAccount.getNumber(), transaction),
                 getUsername(currentAccount.getUser().getUsername(), transaction),

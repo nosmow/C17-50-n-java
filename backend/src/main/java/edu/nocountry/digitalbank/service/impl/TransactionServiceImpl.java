@@ -69,4 +69,12 @@ public class TransactionServiceImpl implements TransactionService {
             throw new IntegrityValidation("Saldo insuficiente");
         }
     }
+
+    public Transaction getById(Integer id) {
+        var transaction = transactionRepository.findById(id).orElse(null);
+        if (transaction == null) {
+            throw new IntegrityValidation("La transacción no existe");
+        }
+        return transaction;
+    }
 }

@@ -36,6 +36,14 @@ public class CategoryServiceImpl implements CategoryService {
                 user.getId());
     }
 
+    public Category getById(Integer id) {
+        var category = categoryRepository.findById(id).orElse(null);
+        if (category == null) {
+            throw new IntegrityValidation("La categoria no existe");
+        }
+        return category;
+    }
+
     private void validateCategoryAndUser(String categoryName, Integer userId) {
         if (categoryRepository.existsByNameAndUserId(categoryName, userId)) {
             throw new IntegrityValidation("La categoría fue creada anteriormente, crea una diferente");

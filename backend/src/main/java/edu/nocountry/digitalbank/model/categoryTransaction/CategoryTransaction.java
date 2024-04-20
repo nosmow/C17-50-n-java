@@ -3,14 +3,12 @@ package edu.nocountry.digitalbank.model.categoryTransaction;
 import edu.nocountry.digitalbank.model.category.Category;
 import edu.nocountry.digitalbank.model.transaction.Transaction;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "categories_transactions")
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

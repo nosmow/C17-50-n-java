@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Table(name = "accounts")
 @Entity
@@ -28,9 +29,9 @@ public class Account {
 
     private BigDecimal balance;
 
-    @OneToOne(mappedBy = "senderAccount", fetch = FetchType.LAZY)
-    private Transaction senderTransaction;
+    @OneToMany(mappedBy = "senderAccount", fetch = FetchType.LAZY)
+    private List<Transaction> senderTransaction;
 
-    @OneToOne(mappedBy = "receiverAccount", fetch = FetchType.LAZY)
-    private Transaction receiverTransaction;
+    @OneToMany(mappedBy = "receiverAccount", fetch = FetchType.LAZY)
+    private List<Transaction> receiverTransaction;
 }
