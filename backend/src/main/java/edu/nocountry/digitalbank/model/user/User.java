@@ -1,6 +1,7 @@
 package edu.nocountry.digitalbank.model.user;
 
 import edu.nocountry.digitalbank.model.account.Account;
+import edu.nocountry.digitalbank.model.category.Category;
 import edu.nocountry.digitalbank.model.company.Company;
 import edu.nocountry.digitalbank.model.person.Person;
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -48,6 +50,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Account account;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Category> categories = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
