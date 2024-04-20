@@ -1,12 +1,15 @@
 package edu.nocountry.digitalbank.model.transaction;
 
 import edu.nocountry.digitalbank.model.account.Account;
+import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransaction;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "transactions")
 @Entity
@@ -33,4 +36,7 @@ public class Transaction {
     private LocalDate transactionDate;
 
     private BigDecimal amount;
+
+    @OneToMany(mappedBy = "transaction", fetch = FetchType.LAZY)
+    private List<CategoryTransaction> categoryTransactions = new ArrayList<>();
 }
