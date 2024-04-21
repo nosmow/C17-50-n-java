@@ -1,9 +1,6 @@
 package edu.nocountry.digitalbank.service.impl;
 
-import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransaction;
-import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionData;
-import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDataDelete;
-import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDetails;
+import edu.nocountry.digitalbank.model.categoryTransaction.*;
 import edu.nocountry.digitalbank.model.transaction.TransactionDetails;
 import edu.nocountry.digitalbank.repository.CategoryTransactionRepository;
 import edu.nocountry.digitalbank.service.AccountService;
@@ -12,6 +9,9 @@ import edu.nocountry.digitalbank.service.CategoryTransactionService;
 import edu.nocountry.digitalbank.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +46,17 @@ public class CategoryTransactionServiceImpl implements CategoryTransactionServic
     public void deleteCategoryTransaction(CategoryTransactionDataDelete data) {
         var categoryTransaction = categoryTransactionRepository.getReferenceById(data.categoryTransactionId());
         categoryTransactionRepository.delete(categoryTransaction);
+    }
+
+    public CategoryTransactionDetailsList listByCategory(String username, String category) {
+        var currentAccount = accountService.findByUserUsername(username);
+        var listCategoryTransaction = categoryTransactionRepository.findByCategoryName(category);
+        List<TransactionDetails> transactions = new ArrayList<>();
+
+        for (var t : listCategoryTransaction) {
+            transactions.add(new TransactionDetails(currentAccount, t.getTransaction()));
+        }
+
+        return new CategoryTransactionDetailsList(category, transactions);
     }
 }

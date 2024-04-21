@@ -3,6 +3,7 @@ package edu.nocountry.digitalbank.controller;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionData;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDataDelete;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDetails;
+import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDetailsList;
 import edu.nocountry.digitalbank.service.CategoryTransactionService;
 import edu.nocountry.digitalbank.util.JwtUtils;
 import jakarta.transaction.Transactional;
@@ -35,5 +36,13 @@ public class CategoryTransactionController {
         categoryTransactionService.deleteCategoryTransaction(data);
 
         return ResponseEntity.ok().body("Operación exitosa la transacción ya no tiene categoría");
+    }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<CategoryTransactionDetailsList> listByCategory(@RequestHeader("Authorization") String token, @PathVariable String category) {
+        String username = jwtUtils.extractUsername(token);
+        var transactionByCategory = categoryTransactionService.listByCategory(username, category);
+
+        return ResponseEntity.ok().body(transactionByCategory);
     }
 }
