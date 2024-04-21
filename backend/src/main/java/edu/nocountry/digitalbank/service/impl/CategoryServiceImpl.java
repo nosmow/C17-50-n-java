@@ -11,6 +11,8 @@ import edu.nocountry.digitalbank.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -33,8 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         return new CategoryDetails(
                 category.getId(),
-                category.getName(),
-                user.getId());
+                category.getName());
     }
 
     public Category getById(Integer id) {
@@ -54,17 +55,16 @@ public class CategoryServiceImpl implements CategoryService {
         var category = categoryRepository.getReferenceById(data.id());
         category.setName(data.name());
 
-                /*var category = Category.builder()
-                        .name(data.name())
-                        .user(user)
-                        .build();
-        */
         categoryRepository.save(category);
 
         return new CategoryDetails(
                 category.getId(),
-                category.getName(),
-                user.getId());
+                category.getName());
+    }
+
+    public List<CategoryDetails> listCategories(String username) {
+
+        return categoryRepository.findByUserUsername(username);
     }
 
     private void validateExistsCategoryAndUser(String categoryName, Integer userId) {

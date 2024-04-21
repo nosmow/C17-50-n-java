@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/categories")
 @CrossOrigin
@@ -36,5 +38,13 @@ public class CategoryController {
         var category = categoryService.updateCategory(username, data);
 
         return ResponseEntity.ok().body(category);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<CategoryDetails>> listCategories(@RequestHeader("Authorization") String token) {
+        String username = jwtUtils.extractUsername(token);
+        var categories = categoryService.listCategories(username);
+
+        return ResponseEntity.ok().body(categories);
     }
 }
