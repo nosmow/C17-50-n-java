@@ -48,11 +48,16 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
-    public TransactionListDetails getUserTransactions(String username) {
+    public TransactionListDetails getUserTransactions(String username, boolean limit) {
         try {
             var account = accountService.findByUserUsername(username);
             var accountDetails = new AccountDetails(account);
-            var transactions = transactionRepository.findTransactionLimitFive(account.getId());
+            List<Transaction> transactions = new ArrayList<>();
+            if (limit) {
+                transactions = transactionRepository.findTransactionLimitFive(account.getId());
+            } else {
+                transactions = transactionRepository.findAllTransaction(account.getId());
+            }
             List<TransactionDetails> transactionsDetails = new ArrayList<>();
             for (var transaction : transactions) {
                 transactionsDetails.add(new TransactionDetails(account, transaction));

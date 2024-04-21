@@ -30,8 +30,16 @@ public class TransactionController {
     @GetMapping("/home")
     public ResponseEntity<TransactionListDetails> getHome(@RequestHeader("Authorization") String token) {
         String username = jwtUtils.extractUsername(token);
-        var transactions = transactionService.getUserTransactions(username);
-        
+        var transactions = transactionService.getUserTransactions(username, true);
+
+        return ResponseEntity.ok().body(transactions);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<TransactionListDetails> getAll(@RequestHeader("Authorization") String token) {
+        String username = jwtUtils.extractUsername(token);
+        var transactions = transactionService.getUserTransactions(username, false);
+
         return ResponseEntity.ok().body(transactions);
     }
 }

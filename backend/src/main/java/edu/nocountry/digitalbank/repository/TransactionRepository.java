@@ -10,4 +10,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     @Query(value = "SELECT * FROM transactions WHERE sender_account_id = :id OR receiver_account_id = :id ORDER BY transaction_date DESC LIMIT 5", nativeQuery = true)
     List<Transaction> findTransactionLimitFive(Integer id);
+
+    @Query(value = "SELECT * FROM transactions WHERE sender_account_id = :id OR receiver_account_id = :id ORDER BY transaction_date DESC", nativeQuery = true)
+    List<Transaction> findAllTransaction(Integer id);
 }

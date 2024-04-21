@@ -9,7 +9,7 @@ public interface TransactionService {
 
     TransactionResponseSend sendMoney(String username, TransactionData data);
 
-    TransactionListDetails getUserTransactions(String username);
+    TransactionListDetails getUserTransactions(String username, boolean limit);
 
     Transaction getById(Integer id);
 }
