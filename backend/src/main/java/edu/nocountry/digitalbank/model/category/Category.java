@@ -3,10 +3,7 @@ package edu.nocountry.digitalbank.model.category;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransaction;
 import edu.nocountry.digitalbank.model.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
 @Table(name = "categories")
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

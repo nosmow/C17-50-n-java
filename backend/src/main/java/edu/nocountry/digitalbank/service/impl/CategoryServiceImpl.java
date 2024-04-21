@@ -3,6 +3,7 @@ package edu.nocountry.digitalbank.service.impl;
 import edu.nocountry.digitalbank.infra.errors.IntegrityValidation;
 import edu.nocountry.digitalbank.model.category.Category;
 import edu.nocountry.digitalbank.model.category.CategoryData;
+import edu.nocountry.digitalbank.model.category.CategoryDataUpdate;
 import edu.nocountry.digitalbank.model.category.CategoryDetails;
 import edu.nocountry.digitalbank.repository.CategoryRepository;
 import edu.nocountry.digitalbank.service.CategoryService;
@@ -21,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         var user = userService.findUserUsername(username);
 
-        validateCategoryAndUser(data.name(), user.getId());
+        validateExistsCategoryAndUser(data.name(), user.getId());
 
         var category = Category.builder()
                 .name(data.name())
@@ -44,9 +45,37 @@ public class CategoryServiceImpl implements CategoryService {
         return category;
     }
 
-    private void validateCategoryAndUser(String categoryName, Integer userId) {
+    public CategoryDetails updateCategory(String username, CategoryDataUpdate data) {
+
+        var user = userService.findUserUsername(username);
+
+        validateCategoryAndUser(data.id(), user.getId());
+
+        var category = categoryRepository.getReferenceById(data.id());
+        category.setName(data.name());
+
+                /*var category = Category.builder()
+                        .name(data.name())
+                        .user(user)
+                        .build();
+        */
+        categoryRepository.save(category);
+
+        return new CategoryDetails(
+                category.getId(),
+                category.getName(),
+                user.getId());
+    }
+
+    private void validateExistsCategoryAndUser(String categoryName, Integer userId) {
         if (categoryRepository.existsByNameAndUserId(categoryName, userId)) {
             throw new IntegrityValidation("La categoría fue creada anteriormente, crea una diferente");
+        }
+    }
+
+    private void validateCategoryAndUser(Integer categoryId, Integer userId) {
+        if (!categoryRepository.existsByIdAndUserId(categoryId, userId)) {
+            throw new IntegrityValidation("El usuario no ha creado esta categoría anteriormente");
         }
     }
 }

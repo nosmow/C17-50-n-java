@@ -1,6 +1,7 @@
 package edu.nocountry.digitalbank.controller;
 
 import edu.nocountry.digitalbank.model.category.CategoryData;
+import edu.nocountry.digitalbank.model.category.CategoryDataUpdate;
 import edu.nocountry.digitalbank.model.category.CategoryDetails;
 import edu.nocountry.digitalbank.service.CategoryService;
 import edu.nocountry.digitalbank.util.JwtUtils;
@@ -24,6 +25,15 @@ public class CategoryController {
     public ResponseEntity<CategoryDetails> saveCategory(@RequestHeader("Authorization") String token, @RequestBody @Valid CategoryData data) {
         String username = jwtUtils.extractUsername(token);
         var category = categoryService.saveCategory(username, data);
+
+        return ResponseEntity.ok().body(category);
+    }
+
+    @PostMapping("/update")
+    @Transactional
+    public ResponseEntity<CategoryDetails> updateCategory(@RequestHeader("Authorization") String token, @RequestBody @Valid CategoryDataUpdate data) {
+        String username = jwtUtils.extractUsername(token);
+        var category = categoryService.updateCategory(username, data);
 
         return ResponseEntity.ok().body(category);
     }
