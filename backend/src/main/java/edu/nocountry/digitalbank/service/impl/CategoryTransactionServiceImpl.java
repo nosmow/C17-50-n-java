@@ -2,6 +2,7 @@ package edu.nocountry.digitalbank.service.impl;
 
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransaction;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionData;
+import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDataDelete;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDetails;
 import edu.nocountry.digitalbank.model.transaction.TransactionDetails;
 import edu.nocountry.digitalbank.repository.CategoryTransactionRepository;
@@ -40,5 +41,10 @@ public class CategoryTransactionServiceImpl implements CategoryTransactionServic
         categoryTransactionRepository.save(categoryTransaction);
 
         return new CategoryTransactionDetails(category, new TransactionDetails(currentAccount, transaction));
+    }
+
+    public void deleteCategoryTransaction(CategoryTransactionDataDelete data) {
+        var categoryTransaction = categoryTransactionRepository.getReferenceById(data.categoryTransactionId());
+        categoryTransactionRepository.delete(categoryTransaction);
     }
 }

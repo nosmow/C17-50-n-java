@@ -1,6 +1,7 @@
 package edu.nocountry.digitalbank.controller;
 
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionData;
+import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDataDelete;
 import edu.nocountry.digitalbank.model.categoryTransaction.CategoryTransactionDetails;
 import edu.nocountry.digitalbank.service.CategoryTransactionService;
 import edu.nocountry.digitalbank.util.JwtUtils;
@@ -26,5 +27,13 @@ public class CategoryTransactionController {
         var categoryTransaction = categoryTransactionService.saveCategoryTransaction(username, data);
 
         return ResponseEntity.ok().body(categoryTransaction);
+    }
+
+    @DeleteMapping("/delete")
+    @Transactional
+    public ResponseEntity<String> deleteCategoryTransaction(@RequestBody @Valid CategoryTransactionDataDelete data) {
+        categoryTransactionService.deleteCategoryTransaction(data);
+
+        return ResponseEntity.ok().body("Operación exitosa la transacción ya no tiene categoría");
     }
 }
