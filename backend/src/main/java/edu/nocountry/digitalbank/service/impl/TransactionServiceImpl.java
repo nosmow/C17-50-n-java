@@ -69,6 +69,23 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
+    public TransactionListDetails getUserTransactionsDate(String username, LocalDate date) {
+        try {
+            var account = accountService.findByUserUsername(username);
+            var accountDetails = new AccountDetails(account);
+            var transactions = transactionRepository.findAllTransactionDate(account.getId(), date);
+
+            List<TransactionDetails> transactionsDetails = new ArrayList<>();
+            for (var transaction : transactions) {
+                transactionsDetails.add(new TransactionDetails(account, transaction));
+            }
+
+            return new TransactionListDetails(accountDetails, transactionsDetails);
+        } catch (Exception e) {
+            throw new IntegrityValidation(e.getMessage());
+        }
+    }
+
     private void validateBalance(BigDecimal balance, BigDecimal amount) {
         if (balance.compareTo(amount) < 0) {
             throw new IntegrityValidation("Saldo insuficiente");

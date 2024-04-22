@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/transactions")
 @CrossOrigin()
@@ -39,6 +41,14 @@ public class TransactionController {
     public ResponseEntity<TransactionListDetails> getAll(@RequestHeader("Authorization") String token) {
         String username = jwtUtils.extractUsername(token);
         var transactions = transactionService.getUserTransactions(username, false);
+
+        return ResponseEntity.ok().body(transactions);
+    }
+
+    @GetMapping("/date/{date}")
+    public ResponseEntity<TransactionListDetails> getUserTransactionsDate(@RequestHeader("Authorization") String token, @PathVariable @Valid LocalDate date) {
+        String username = jwtUtils.extractUsername(token);
+        var transactions = transactionService.getUserTransactionsDate(username, date);
 
         return ResponseEntity.ok().body(transactions);
     }
