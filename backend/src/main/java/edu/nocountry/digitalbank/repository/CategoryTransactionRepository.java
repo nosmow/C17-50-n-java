@@ -10,4 +10,6 @@ public interface CategoryTransactionRepository extends JpaRepository<CategoryTra
     CategoryTransaction findFirstByTransactionId(Integer id);
 
     List<CategoryTransaction> findByCategoryName(String name);
+
+    List<CategoryTransaction> findByCategoryId(Integer idCategory);
 }

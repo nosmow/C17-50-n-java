@@ -47,4 +47,13 @@ public class CategoryController {
 
         return ResponseEntity.ok().body(categories);
     }
+
+    @DeleteMapping("/delete/{id}")
+    @Transactional
+    public ResponseEntity<String> deleteCategory(@RequestHeader("Authorization") String token, @RequestParam @Valid Integer id) {
+        String username = jwtUtils.extractUsername(token);
+        categoryService.deleteCategory(username, id);
+
+        return ResponseEntity.ok().body("Categoría eliminada");
+    }
 }

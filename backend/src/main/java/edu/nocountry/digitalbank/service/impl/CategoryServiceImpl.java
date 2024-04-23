@@ -7,6 +7,7 @@ import edu.nocountry.digitalbank.model.category.CategoryDataUpdate;
 import edu.nocountry.digitalbank.model.category.CategoryDetails;
 import edu.nocountry.digitalbank.repository.CategoryRepository;
 import edu.nocountry.digitalbank.service.CategoryService;
+import edu.nocountry.digitalbank.service.CategoryTransactionService;
 import edu.nocountry.digitalbank.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final UserService userService;
+    private final CategoryTransactionService categoryTransactionService;
 
     public CategoryDetails saveCategory(String username, CategoryData data) {
 
@@ -65,6 +67,16 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDetails> listCategories(String username) {
 
         return categoryRepository.findByUserUsername(username);
+    }
+
+    public void deleteCategory(String username, Integer idCategory) {
+        var user = userService.findUserUsername(username);
+        validateCategoryAndUser(idCategory, user.getId());
+        var category = categoryRepository.getReferenceById(idCategory);
+
+        categoryTransactionService.deleteCategoryTransactionByCategory(idCategory);
+
+        categoryRepository.delete(category);
     }
 
     private void validateExistsCategoryAndUser(String categoryName, Integer userId) {

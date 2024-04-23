@@ -12,4 +12,6 @@ public interface CategoryTransactionService {
     void deleteCategoryTransaction(CategoryTransactionDataDelete data);
 
     CategoryTransactionDetailsList listByCategory(String username, String category);
+
+    void deleteCategoryTransactionByCategory(Integer idCategory);
 }

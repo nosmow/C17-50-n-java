@@ -2,9 +2,9 @@ package edu.nocountry.digitalbank.service.impl;
 
 import edu.nocountry.digitalbank.model.categoryTransaction.*;
 import edu.nocountry.digitalbank.model.transaction.TransactionDetails;
+import edu.nocountry.digitalbank.repository.CategoryRepository;
 import edu.nocountry.digitalbank.repository.CategoryTransactionRepository;
 import edu.nocountry.digitalbank.service.AccountService;
-import edu.nocountry.digitalbank.service.CategoryService;
 import edu.nocountry.digitalbank.service.CategoryTransactionService;
 import edu.nocountry.digitalbank.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ public class CategoryTransactionServiceImpl implements CategoryTransactionServic
     private final CategoryTransactionRepository categoryTransactionRepository;
     private final AccountService accountService;
     private final TransactionService transactionService;
-    private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
 
     public CategoryTransactionDetails saveCategoryTransaction(String username, CategoryTransactionData data) {
 
         var currentAccount = accountService.findByUserUsername(username);
         var categoryTransactionExists = categoryTransactionRepository.findFirstByTransactionId(data.transactionId());
         var transaction = transactionService.getById(data.transactionId());
-        var category = categoryService.getById(data.categoryId());
+        var category = categoryRepository.getById(data.categoryId());
 
         var categoryTransaction = CategoryTransaction.builder()
                 .transaction(transaction)
@@ -58,5 +58,15 @@ public class CategoryTransactionServiceImpl implements CategoryTransactionServic
         }
 
         return new CategoryTransactionDetailsList(category, transactions);
+    }
+
+    public void deleteCategoryTransactionByCategory(Integer idCategory) {
+        var category = categoryTransactionRepository.findByCategoryId(idCategory);
+
+        if (category != null) {
+            for (var ct : category) {
+                categoryTransactionRepository.delete(ct);
+            }
+        }
     }
 }

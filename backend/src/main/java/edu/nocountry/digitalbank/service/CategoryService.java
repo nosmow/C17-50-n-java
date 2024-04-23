@@ -15,4 +15,6 @@ public interface CategoryService {
     CategoryDetails updateCategory(String username, CategoryDataUpdate data);
 
     List<CategoryDetails> listCategories(String username);
+
+    void deleteCategory(String username, Integer idCategory);
 }
