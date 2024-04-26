@@ -5,11 +5,20 @@ export const routes = {
     home:'/home',
     admin:"/admin",
     error: '*',
+    send:"/send",
+    receive:"/receive",
+    transactions:"/transactions",
+    dashboard:"/dashboard",
+    maintain:"/maintain"
 }
-
+const def= 'http://localhost:8080/'
 export const urlPOST = {
-    userRegister: 'http://localhost:8080/users/register',
-    enterpriseRegister:'http://localhost:8080/users/register/company',
-    login: 'http://localhost:8080/login'
+    userRegister: def + 'users/register',
+    enterpriseRegister:def + 'users/register/company',
+    login: def + 'login',
+    home: def + 'transactions/home',
+    send: def+ 'transactions/send',
+    transactions: def + "transactions/all",
+    listCategory: def + "categories/list",
 }
   

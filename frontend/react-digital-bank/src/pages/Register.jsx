@@ -86,7 +86,7 @@ export function Register(){
 
                     <h1 className="text-gray-100 mb-7 text-2xl"> Conta con nosotros! </h1>
 
-                    <form className="min-w-60 max-w-md w-full" onSubmit={handleForm}>
+                    <form className="min-w-60 max-w-md w-full" onSubmit={handleForm} autoComplete="off">
                         
                         <div className="grid md:grid-cols-2 md:gap-6">
 

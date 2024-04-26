@@ -21,7 +21,7 @@ function validarCUIT(cuit) {
     return patron.test(cuit) && cuit.length==11;
 }
 
-function validarUsername(nombreUsuario) {
+export function validarUsername(nombreUsuario) {
     // Longitud mínima y máxima del nombre de usuario
     var longitudMinima = 3;
     var longitudMaxima = 20;
@@ -197,4 +197,31 @@ export function loginFormatter ( props ){
     let {  username, password } = props
 
     return { username, password }
+}
+
+
+export const reverseString = (str) => {
+    var splitString = str.split(""); 
+    var reverseArray = splitString.reverse();
+    var joinArray = reverseArray.join("");
+    return joinArray;
+}
+
+export const numberWithCommas = (str) =>{
+    let newStr=""
+    let cont=0
+
+    str= String(str).replace(/\D/g, "")
+
+    for(let i= str.length-1 ; i>=0; i--){
+        cont++
+        if(cont==3 && i!=0){
+            cont = 0
+            newStr= newStr + str[i] + ","
+        }
+        else
+            newStr= newStr + str[i]
+    }
+
+    return reverseString(newStr)
 }
