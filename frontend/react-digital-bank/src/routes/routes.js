@@ -11,7 +11,7 @@ export const routes = {
     dashboard:"/dashboard",
     maintain:"/maintain"
 }
-const def= 'http://localhost:8080/'
+const def= 'https://c17-50-n-java.onrender.com/'
 export const urlPOST = {
     userRegister: def + 'users/register',
     enterpriseRegister:def + 'users/register/company',
