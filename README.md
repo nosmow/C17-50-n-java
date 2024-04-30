@@ -13,18 +13,12 @@
 	- [Essential features](#essential-features)
 	- [Type of users](#type-of-users)
 - [Project status](#project-status)
-- [Functionalities](#functionalities)
-- [Project access](#project-access)
-	- [Backend access](#backend-access)
-	- [Frontend access](#frontend-access) 
 - [Used technology](#used-technology)
 	- [Used in Backend](#used-in-backend)
 	- [Used in Frontend](#used-in-frontend) 
 	- [Tools and IDEs](#tools-and-ides)
-- [Documentation](#documentation)
 - [API testing](#api-testing)
 - [Authors](#authors)
-- [License](#license)
 
 <br/>
 
@@ -53,25 +47,7 @@ The platform will be aimed at individual customers who wish to manage their pers
 
 ## Project status
 
-![Badge Developing](https://img.shields.io/badge/STATE-DEVELOPING-blue)
-
-<br/>
-
-## Functionalities
-
-> In progress...
-
-<br/>
-
-## Project access
-
-### Backend access
-
-> In progress...
-
-### Frontend access 
-
-> In progress...
+![Badge Developing](https://img.shields.io/badge/STATE-FINALIZED-blue)
 
 <br/>
 
@@ -91,32 +67,15 @@ The platform will be aimed at individual customers who wish to manage their pers
 
 <br/>
 
-## Documentation
-
-> In progress...
-
-1. You can access the API documentation thanks to Swagger, just type this address in your browser when the project is running:
-
-```bash
-http://localhost:8080/swagger-ui/index.html
-```
-<br/>
-
 ## API testing
 
 1. You can test the API from the Postman program, here is a file already configured for you to download and then import into the program:
 
-* Click to download [**File**]()
+* Click to access the [**File**](https://documenter.getpostman.com/view/25625060/2sA3Bq4WLV#d105f270-fd43-4a1d-9786-82f4883be535)
 
 <br/>
 
 ## Authors
 
-|  [<img src="https://avatars.githubusercontent.com/u/96395490?v=4" width=100><br><sub>Cristian Solís</sub>](https://github.com/jammingcode) | [<img src="https://avatars.githubusercontent.com/u/165520012?v=4" width=100><br><sub>Dainer Cortés</sub>](https://github.com/nosmow) | [<img src="https://avatars.githubusercontent.com/u/83266332?v=4" width=100><br><sub>Francisco Rizzi</sub>](https://github.com/The-Synthetica) | Autor | Autor | Autor  |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-
-<br/>
-
-## License
-
-Digital Banking is licensed under the  [MIT license]()
+| [<img src="https://avatars.githubusercontent.com/u/83266332?v=4" width=100><br><sub>Francisco Rizzi</sub>](https://www.linkedin.com/in/franciscorizzi/)<br><sub>Frontned</sub> | [<img src="https://avatars.githubusercontent.com/u/49821522?v=4" width=100><br><sub>Diego Romani</sub>](https://www.linkedin.com/in/diego-romani-205924186/)<br><sub>Designer</sub> | [<img src="https://avatars.githubusercontent.com/u/165520012?v=4" width=100><br><sub>Dainer Cortés</sub>](https://www.linkedin.com/in/dainercortes/)<br><sub>Backend</sub> |
+| :---: | :---: | :---: |
