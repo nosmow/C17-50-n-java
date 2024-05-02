@@ -12,6 +12,7 @@
 	- [User stories](#user-stories)
 	- [Essential features](#essential-features)
 	- [Type of users](#type-of-users)
+- [Demo](#demo)
 - [Project status](#project-status)
 - [Used technology](#used-technology)
 	- [Used in Backend](#used-in-backend)
@@ -44,6 +45,10 @@ The project consists of the development of a digital banking platform that allow
 The platform will be aimed at individual customers who wish to manage their personal accounts, as well as companies that need to access and manage their business finances. In addition, you will have an administrator role that will have access to management and supervision functions of the platform.
 
 <br/>
+
+## Demo
+
+[![Alt text](https://img.youtube.com/vi/24CCQOLg3KE/0.jpg)](https://www.youtube.com/watch?v=24CCQOLg3KE)
 
 ## Project status
 
