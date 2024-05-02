@@ -48,6 +48,8 @@ The platform will be aimed at individual customers who wish to manage their pers
 
 ## Demo
 
+Click to view the video
+
 [![Alt text](https://img.youtube.com/vi/24CCQOLg3KE/0.jpg)](https://www.youtube.com/watch?v=24CCQOLg3KE)
 
 ## Project status
